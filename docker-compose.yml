@@ -5,10 +5,10 @@ services:
     build: ./php
     container_name: php
     environment:
-      - MYSQL_HOST='${DB_CONNECTION}'
-      - MYSQL_DATABASE='${DB_DATABASE}'
-      - MYSQL_USER='${DB_USERNAME}'
-      - MYSQL_PASSWORD='${DB_PASSWORD}'
+      MYSQL_HOST: '${DB_CONNECTION}'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
@@ -37,7 +37,7 @@ services:
     container_name: mysql
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD='${DB_ROOTPASSWORD}'
+      MYSQL_ROOT_PASSWORD: '${DB_ROOTPASSWORD}'
     volumes:
       - mysql_php:/mysql.sql  
     networks:
@@ -48,10 +48,10 @@ services:
     container_name: phpmyadmin
     restart: unless-stopped
     environment:
-      - PMA_ARBITRARY=1
-      - UPLOAD_LIMIT=1024M
-      - MEMORY_LIMIT=1024M
-      - MAX_EXECUTION_TIME=300  
+      PMA_ARBITRARY: 1
+      UPLOAD_LIMIT: 1024M
+      MEMORY_LIMIT: 1024M
+      MAX_EXECUTION_TIME: 300
     ports:
       - '${PHPMYADMIN_PORT}:80'
     depends_on:
