@@ -15,5 +15,8 @@ class Database
         $this->DB_PASSWORD = $password;
     }
 
+    public function connection()
+    {
 
+    }
 }
