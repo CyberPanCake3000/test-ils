@@ -1,20 +1,27 @@
+<h2>Test task for ILS company</h2>
+
 <?php
-$host = "mysql";
-$username = "root";
-$password = "s123123";
-$dbname = "mysql";
+require '../backend/Classes/Database.php';
+require '../backend/Models/Delivery.php';
 
-$conn = mysqli_connect($host, $username, $password, $dbname);
-
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+$db_connection = new Database('mysql','mysql', 'root', 's123123');
+$connect = $db_connection->connect();
+if($connect) {
+    ?>
+    <div>DB connected</div>
+<?php
 }else{
-    echo('success');
-}
-mysqli_close($conn);
-
-require '../backend/Classes/Main.php';
-require '../backend/Controllers/MainController.php';
+    ?>
+    <div>DB is not connected</div>
+<?php
+};
+$deliveriesObj = new Delivery($connect);
+$deliveries = $deliveriesObj->getAll();
 
 ?>
-<h1>Hello world</h1>
+
+<form action="../backend/Forms/insertForm.php" method="POST">
+
+</form>
+
+

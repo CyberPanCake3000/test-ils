@@ -13,10 +13,17 @@ class Database
         $this->DB_DATABASE = $database;
         $this->DB_USER = $user;
         $this->DB_PASSWORD = $password;
+
     }
 
-    public function connection()
+    public function connect()
     {
+        $conn = mysqli_connect($this->DB_HOST, $this->DB_USER, $this->DB_PASSWORD, $this->DB_DATABASE);
 
+        if (!$conn) {
+            return false;
+        }
+
+        return $conn;
     }
 }
