@@ -16,7 +16,12 @@ class Delivery
     public function getAll()
     {
         $sql = "SELECT * FROM $this->tableName";
+        $query = mysqli_query( $this->connection, $sql );
+        $result = [];
 
-        return mysqli_fetch_array(mysqli_query($this->connection, $sql), MYSQLI_ASSOC);
+        while($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+            $result[] = $row;
+        }
+        return $result;
     }
 }
