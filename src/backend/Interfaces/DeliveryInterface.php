@@ -1,5 +1,6 @@
 <?php
 
-interface DeliveryInterface{
+interface DeliveryInterface
+{
     public function calculateCost($source, $destination, $weight);
 }

@@ -1,27 +1,35 @@
 <?php
 
-require '../Interfaces/DeliveryInterface.php';
-require 'Delivery.php';
-class SlowDelivery extends Delivery implements DeliveryInterface
+class SlowDelivery implements DeliveryInterface
 {
+    private $baseUrl;
     private $basePrice;
 
-    public function __construct($baseUrl, $basePrice) {
+    public function __construct($baseUrl, $basePrice)
+    {
         $this->baseUrl = $baseUrl;
         $this->basePrice = $basePrice;
     }
 
-    public function calculateCost($source, $destination, $weight) {
-        $result = parent::sendRequest($this->baseUrl, [
+    public function calculateCost($source, $destination, $weight)
+    {
+        $data = json_decode($this->sendRequest($this->baseUrl, [
             'sourceKladr' => $source,
             'targetKladr' => $destination,
             'weight' => $weight
-        ]);
+        ]), true);
 
-        // обработка результатов и формирование единого формата
-        $price = $this->basePrice * $result['coefficient'];
-        $date = $result['date'];
+        $price = $this->basePrice * $data['coefficient'];
+        $date = $data['date'];
+        return json_encode(['price' => $price, 'date' => $date, 'error' => $data['error']]);
+    }
 
-        return ['price' => $price, 'date' => $date, 'error' => $result['error']];
+    public function sendRequest($url, $data)
+    {
+        //emulate data receiving from service
+        $coefficient = rand(0, 100) / 100;
+        $date = date('Y-m-d');
+
+        return json_encode(['coefficient' => $coefficient, 'date' => $date, 'error' => '']);
     }
 }
