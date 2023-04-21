@@ -21,6 +21,21 @@ $mainController = new Controller();
 } ?>
 
 <div style="margin-top: 20px;">
+    <h2>Let's add new delivery!</h2>
+    <form action="insertNewDelivery.php" method="POST">
+        <input aria-label="weight" type="number" placeholder="weight" id="weight" name="weight" required>
+        <input aria-label="source" type="text" placeholder="source" id="source" name="source" required>
+        <input aria-label="destination" type="text" placeholder="destination" id="destination" name="destination"
+               required>
+        <select name="selectedStrategy" id="selectedStrategy" aria-label="selectedStrategy">
+            <option value="0">Fast</option>
+            <option value="1">Slow</option>
+        </select>
+        <button type="submit">Рассчитать</button>
+    </form>
+</div>
+
+<div style="margin-top: 20px;">
     <table border="1">
         <tr>
             <td>id</td>
@@ -49,19 +64,6 @@ $mainController = new Controller();
     </table>
 </div>
 
-<div style="margin-top: 20px;">
-    <h2>Let's add new delivery!</h2>
-    <form action="insertNewDelivery.php" method="POST">
-        <input aria-label="weight" type="number" placeholder="weight" id="weight" name="weight" required>
-        <input aria-label="source" type="text" placeholder="source" id="source" name="source" required>
-        <input aria-label="destination" type="text" placeholder="destination" id="destination" name="destination"
-               required>
-        <select name="selectedStrategy" id="selectedStrategy" aria-label="selectedStrategy">
-            <option value="0">Fast</option>
-            <option value="1">Slow</option>
-        </select>
-        <button type="submit">Рассчитать</button>
-    </form>
-</div>
+
 
 
