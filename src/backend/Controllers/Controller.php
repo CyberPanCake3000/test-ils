@@ -47,9 +47,9 @@ class Controller
             floatval($resultDecode['price']), $resultDecode['error'], $resultDecode['date']);
 
         if (!$inserted) {
-            return 'Error! cant insert data in the table!';
+            return false;
         }
 
-        return $resultDecode;
+        return true;
     }
 }
