@@ -5,7 +5,7 @@ class Controller
     private $connection;
     private $dbObject;
     private $deliveryObject;
-    private $strategies = [];
+    private $deliveryStrategies = [];
 
     public function __construct()
     {
@@ -14,8 +14,8 @@ class Controller
 
         $this->deliveryObject = new Delivery($this->connection);
 
-        $this->strategies[] = new FastDelivery('http://fast-delivery.com');
-        $this->strategies[] = new SlowDelivery('http://slow-delivery.com', 150);
+        $this->deliveryStrategies[] = new FastDelivery('http://fast-delivery.com');
+        $this->deliveryStrategies[] = new SlowDelivery('http://slow-delivery.com', 150);
     }
 
     public function databaseConnect()
@@ -39,7 +39,7 @@ class Controller
 
     public function calculateDeliveryCost($data)
     {
-        $strategy = $this->strategies[$data['selectedStrategy']];
+        $strategy = $this->deliveryStrategies[(int)$data['selectedStrategy']];
         $result = $strategy->calculateCost($data['source'], $data['destination'], $data['weight']);
         $resultDecode = json_decode($result, true);
 
